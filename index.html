@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ملاهي الكتابة مع فطومة</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;800&display=swap" rel="stylesheet">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;min-height:100%}
+body{font-family:Cairo,"Segoe UI",Tahoma,sans-serif;font-weight:800;color:#4a1d96;background:linear-gradient(#ffc2e6 0,#cdb8ff 55%,#ffe7a3 100%) fixed;overflow-x:hidden;user-select:none;-webkit-user-select:none}
+#bunt{position:fixed;top:0;left:0;right:0;font-size:26px;white-space:nowrap;overflow:hidden;text-align:center;z-index:0;opacity:.9}
+#deco{position:fixed;bottom:0;left:0;right:0;font-size:clamp(38px,10vw,64px);display:flex;justify-content:space-around;pointer-events:none;z-index:0}
+#app{position:relative;z-index:1;max-width:560px;margin:0 auto;padding:36px 12px 100px;text-align:center}
+h1{margin:6px 0;font-size:clamp(26px,7vw,38px);color:#d6246e;text-shadow:0 3px 0 #fff}
+.t{font-size:clamp(19px,5.2vw,25px);margin:6px 0 12px;background:#ffffffb0;border-radius:18px;padding:6px 14px;display:inline-block}
+.row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:10px 0}
+.btn{font:inherit;font-size:24px;border:0;border-radius:40px;padding:12px 28px;background:#ff4fa3;color:#fff;box-shadow:0 6px 0 #b8286f;cursor:pointer;margin:8px}
+.btn:active{transform:translateY(4px);box-shadow:0 2px 0 #b8286f}
+.btn.g{background:#2fb86b;box-shadow:0 6px 0 #1b7d45}
+.btn.s{background:#8a5cf6;box-shadow:0 6px 0 #5a32b8}
+.btn.sm{font-size:18px;padding:8px 20px}
+.tk{font:inherit;width:78px;height:92px;background:#fff6c9;border:4px dashed #ff9f1c;border-radius:16px;font-size:44px;color:#d6246e;cursor:pointer;position:relative;box-shadow:0 5px 0 #e08a0a}
+.tk.ride{width:46%;height:auto;min-height:96px;font-size:40px;color:#4a1d96;padding:6px 4px}
+.tk.ride small{display:block;font-size:18px;font-family:inherit;font-weight:800;line-height:1.2}
+.tk.done{background:#d3f9d8;border-color:#2fb86b;box-shadow:0 5px 0 #1b7d45}
+.tk.done::after{content:"🎟️";position:absolute;bottom:-6px;left:-6px;font-size:24px}
+.sec{font-size:22px;margin:14px 0 2px}
+.wr{width:100%;max-width:340px;touch-action:none;background:#fff;border:5px solid #8a5cf6;border-radius:24px;display:block;margin:0 auto}
+.sl{width:56px;height:68px;border:4px dashed #8a5cf6;border-radius:14px;background:#ffffffb0;font-size:40px;color:#d6246e;display:flex;align-items:center;justify-content:center}
+.sl.ok{border-style:solid;border-color:#2fb86b;background:#d3f9d8}
+.sl.q{background:#fff6c9;border-color:#ff9f1c;color:#ff9f1c}
+.tl{font:inherit;width:60px;height:70px;font-size:38px;color:#d6246e;background:#fff6c9;border:4px solid #ff9f1c;border-radius:16px;box-shadow:0 5px 0 #e08a0a;cursor:pointer}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:340px;margin:0 auto}
+.cell{aspect-ratio:1;font:inherit;font-size:clamp(46px,14vw,70px);color:#4a1d96;background:#fff;border:4px solid #8a5cf6;border-radius:22px;box-shadow:0 5px 0 #5a32b8;cursor:pointer}
+.shake{animation:sh .4s}
+@keyframes sh{25%{transform:translateX(-10px)}75%{transform:translateX(10px)}}
+.pop{animation:pp .5s}
+@keyframes pp{50%{transform:scale(1.25)}}
+.fall{position:fixed;top:-40px;font-size:34px;z-index:99;pointer-events:none;animation:fl 2.2s linear forwards}
+@keyframes fl{to{transform:translateY(110vh) rotate(360deg)}}
+.big{font-size:90px;display:inline-block}
+.spin{animation:sp 4s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.fall,.spin{animation-duration:.01s}}
+</style>
+</head>
+<body>
+<div id="bunt">🎈🎪🎈🎪🎈🎪🎈🎪🎈🎪🎈🎪🎈🎪</div>
+<div id="deco"><span>🎠</span><span>🎡</span><span>🎢</span><span>🎪</span></div>
+<div id="app"><div id="st"></div></div>
+<script>
+const I=[{c:'أ',n:'ألف'},{c:'ب',n:'باء'},{c:'ت',n:'تاء'},{c:'ث',n:'ثاء'},{c:'١',n:'واحد'},{c:'٢',n:'اثنان'},{c:'٣',n:'ثلاثة'},{c:'٤',n:'أربعة'},{c:'٥',n:'خمسة'},{c:'٦',n:'ستة'}];
+const R=[{id:'r1',e:'🔍',n:'اوجدي المختلف'},{id:'r2',e:'🔢',n:'رتّبي الأرقام'},{id:'r3',e:'🔤',n:'رتّبي الحروف'},{id:'r4',e:'❓',n:'ما الناقص؟'},{id:'r5',e:'👂',n:'اكتبي ما تسمعين'}];
+const TOTAL=I.length+R.length,NUM=['١','٢','٣','٤','٥','٦'],LET=['أ','ب','ت','ث'];
+const PR=['أحسنتِ يا فطومة!','برافو فطومة!','ممتازة!','رائعة يا عسل!','شاطرة يا فطومة!'];
+const st=document.getElementById('st');let ac=null;const done=new Set();
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const sh=a=>a.map(v=>[Math.random(),v]).sort((x,y)=>x[0]-y[0]).map(x=>x[1]);
+const nm=c=>I.find(x=>x.c==c).n;
+function say(t){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang='ar-SA';u.rate=.75;u.pitch=1.2;speechSynthesis.speak(u)}catch(e){}}
+function ding(){if(!ac)return;[660,880,1100].forEach((f,i)=>{const o=ac.createOscillator(),g=ac.createGain(),t=ac.currentTime+i*.12;o.type='triangle';o.frequency.value=f;g.gain.setValueAtTime(.2,t);g.gain.exponentialRampToValueAtTime(.001,t+.3);o.connect(g);g.connect(ac.destination);o.start(t);o.stop(t+.35)})}
+function oops(){if(!ac)return;const o=ac.createOscillator(),g=ac.createGain();o.frequency.value=220;g.gain.value=.12;o.connect(g);g.connect(ac.destination);o.start();o.stop(ac.currentTime+.15)}
+function clap(){if(!ac)return;for(let i=0;i<26;i++){const t=ac.currentTime+i*.07+Math.random()*.05,b=ac.createBuffer(1,2200,ac.sampleRate),d=b.getChannelData(0);for(let j=0;j<d.length;j++)d[j]=(Math.random()*2-1)*Math.pow(1-j/d.length,3);const s=ac.createBufferSource(),f=ac.createBiquadFilter(),g=ac.createGain();s.buffer=b;f.type='bandpass';f.frequency.value=1500+Math.random()*2500;g.gain.value=.5;s.connect(f);f.connect(g);g.connect(ac.destination);s.start(t)}}
+function confetti(){for(let i=0;i<22;i++){const s=document.createElement('span');s.className='fall';s.textContent=pick(['⭐','🎉','🎈','🎊','🎟️']);s.style.left=Math.random()*95+'vw';s.style.animationDelay=Math.random()*.6+'s';document.body.append(s);setTimeout(()=>s.remove(),3000)}}
+function cheer(big,txt){ding();if(big)clap();confetti();say(txt||pick(PR))}
+function bad(el){oops();el.classList.remove('shake');void el.offsetWidth;el.classList.add('shake');say('حاولي مرة أخرى')}
+function page(title,body){st.innerHTML=`<div class="t">${title}</div>${body}<div><button class="btn sm" id="bk">رجوع للملاهي</button></div>`;document.getElementById('bk').onclick=menu}
+function finish(id){done.add(id);cheer(true);setTimeout(()=>done.size==TOTAL?end():menu(),2000)}
+const BT='<div class="row"><button class="btn s" id="cl">مسح 🧽</button><button class="btn g" id="ok">تم ✓</button></div>';
+
+function start(){st.innerHTML='<h1>ملاهي الكتابة 🎡</h1><div class="t">مع فطومة العسل</div><div><span class="big spin">🎡</span></div><button class="btn" id="go">ادخلي الملاهي</button>';
+document.getElementById('go').onclick=()=>{ac=ac||new (window.AudioContext||window.webkitAudioContext)();say('أهلا فطومة! اختاري لعبة وهيا نكتب');menu()}}
+
+function menu(){const tk=a=>a.map(i=>`<button class="tk${done.has(i.c)?' done':''}" data-c="${i.c}">${i.c}</button>`).join('');
+st.innerHTML=`<h1>🎟️ ${done.size} من ${TOTAL}</h1><div class="t">اختاري تذكرة أو لعبة</div><div class="sec">كتابة الحروف</div><div class="row">${tk(I.slice(0,4))}</div><div class="sec">كتابة الأرقام</div><div class="row">${tk(I.slice(4))}</div><div class="sec">ألعاب الملاهي</div><div class="row">${R.map(r=>`<button class="tk ride${done.has(r.id)?' done':''}" data-r="${r.id}">${r.e}<small>${r.n}</small></button>`).join('')}</div>`;
+st.querySelectorAll('[data-c]').forEach(b=>b.onclick=()=>{say(nm(b.dataset.c));setTimeout(()=>write(b.dataset.c,1),700)});
+st.querySelectorAll('[data-r]').forEach(b=>b.onclick=()=>{const id=b.dataset.r;({r1:()=>odd(0),r2:()=>order(NUM,'r2','رتّبي الأرقام من ١ إلى ٦'),r3:()=>order(LET,'r3','رتّبي الحروف أ ب ت ث'),r4:()=>miss(0),r5:()=>dict(0)})[id]()})}
+
+function pad(c,mode){const cv=document.getElementById('cv'),x=cv.getContext('2d');let drawn=0,pen=false;
+function bg(){x.clearRect(0,0,340,260);x.strokeStyle='#9fd4f0';x.lineWidth=3;x.setLineDash([10,8]);[70,150,215].forEach(y=>{x.beginPath();x.moveTo(10,y);x.lineTo(330,y);x.stroke()});
+x.font='800 190px Cairo,Arial';x.textAlign='center';x.textBaseline='alphabetic';
+if(mode==1){x.fillStyle='#efe9ff';x.fillText(c,170,190);x.strokeStyle='#8a5cf6';x.lineWidth=3;x.setLineDash([8,8]);x.strokeText(c,170,190)}
+else if(mode==2){x.fillStyle='rgba(138,92,246,.10)';x.fillText(c,170,190)}
+x.setLineDash([]);drawn=0}
+bg();const p=e=>{const q=cv.getBoundingClientRect();return[(e.clientX-q.left)*340/q.width,(e.clientY-q.top)*260/q.height]};
+cv.onpointerdown=e=>{pen=true;cv.setPointerCapture(e.pointerId);const[a,b]=p(e);x.strokeStyle='#ff4fa3';x.lineWidth=14;x.lineCap='round';x.lineJoin='round';x.beginPath();x.moveTo(a,b);x.lineTo(a+.1,b+.1);x.stroke()};
+cv.onpointermove=e=>{if(!pen)return;const[a,b]=p(e);x.lineTo(a,b);x.stroke();drawn++};
+cv.onpointerup=()=>pen=false;
+document.getElementById('cl').onclick=bg;return()=>drawn>=5}
+
+function write(c,r){page(`${c} (${nm(c)}) — ${r==1?'تتبّعي الخط المنقط':'الآن اكتبي لوحدك'} ✍️`,'<canvas class="wr" id="cv" width="340" height="260"></canvas>'+BT);
+const ok=pad(c,r);setTimeout(()=>say(r==1?'اتبعي الخط':'اكتبي لوحدك'),200);
+document.getElementById('ok').onclick=()=>{if(!ok()){say('اكتبي بإصبعك');return}
+if(r==1){cheer(false);setTimeout(()=>write(c,2),1600)}else finish(c)}}
+
+function odd(k){const rd=[['ب','ت'],['٣','٤'],['ت','ث']];if(k>=3)return finish('r1');const[a,b]=rd[k];
+page('اوجدي الشكل المختلف 🔍','<div class="g3">'+sh([a,a,a,a,a,b]).map(c=>`<button class="cell" data-c="${c}">${c}</button>`).join('')+'</div>');say('اوجدي المختلف');
+st.querySelectorAll('.cell').forEach(el=>el.onclick=()=>{if(el.dataset.c==b){el.classList.add('pop');cheer(false);setTimeout(()=>odd(k+1),1600)}else bad(el)})}
+
+function order(list,id,title){let n=0;
+page(title+' 🔢','<div class="row" id="sl">'+list.map(()=>'<div class="sl"></div>').join('')+'</div><div class="row" style="margin-top:26px">'+sh(list).map(c=>`<button class="tl" data-c="${c}">${c}</button>`).join('')+'</div>');say(title);
+const sl=st.querySelectorAll('.sl');
+st.querySelectorAll('.tl').forEach(t=>t.onclick=()=>{if(t.dataset.c==list[n]){sl[n].textContent=t.dataset.c;sl[n].classList.add('ok','pop');t.remove();ding();say(nm(t.dataset.c));if(++n==list.length)finish(id)}else bad(t)})}
+
+function miss(k){const rd=[[NUM,2],[LET,1],[NUM,4]];if(k>=3)return finish('r4');const[s,i]=rd[k],ans=s[i];
+const ch=sh([ans,...sh(s.filter(c=>c!=ans)).slice(0,2)]);
+page('ما الحرف أو الرقم الناقص؟ ❓','<div class="row">'+s.map((c,j)=>`<div class="sl${j==i?' q':''}">${j==i?'؟':c}</div>`).join('')+'</div><div class="row" style="margin-top:26px">'+ch.map(c=>`<button class="tl" data-c="${c}">${c}</button>`).join('')+'</div>');say('ما الناقص؟');
+st.querySelectorAll('.tl').forEach(t=>t.onclick=()=>{if(t.dataset.c==ans){const q=st.querySelector('.q');q.textContent=ans;q.classList.remove('q');q.classList.add('ok','pop');cheer(false,nm(ans)+'. '+pick(PR));setTimeout(()=>miss(k+1),1800)}else bad(t)})}
+
+function dict(k,L){L=L||sh(I).slice(0,3);if(k>=3)return finish('r5');const c=L[k];
+page(`اسمعي واكتبي (${k+1} من 3) 👂`,'<div class="row"><button class="btn s" id="sp">🔊 اسمعي</button></div><canvas class="wr" id="cv" width="340" height="260"></canvas>'+BT);
+const ok=pad(c,3),sp=()=>say(nm(c));setTimeout(sp,300);document.getElementById('sp').onclick=sp;
+document.getElementById('ok').onclick=()=>{if(!ok()){say('اكتبي بإصبعك');return}cheer(false);setTimeout(()=>dict(k+1,L),1700)}}
+
+function end(){st.innerHTML='<h1>أحسنتِ يا فطومة! 🎉</h1><div><span class="big spin">🎡</span><span class="big">🎢</span></div><div class="t">جمعتِ كل التذاكر!<br>أنتِ بطلة الملاهي 🏆</div><br><button class="btn" id="re">نلعب مرة أخرى 🔁</button>';
+cheer(true,'أحسنتِ يا فطومة! جمعتِ كل التذاكر');setTimeout(clap,1500);document.getElementById('re').onclick=()=>{done.clear();menu()}}
+start();
+</script>
+</body>
+</html>
